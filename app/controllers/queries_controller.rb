@@ -1,5 +1,5 @@
 class QueriesController < ApplicationController
-  respond_to :json
+  respond_to :json, :xml
 
   def show
     input = params[:id]
