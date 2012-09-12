@@ -4,7 +4,21 @@ class AllaBolagScraper
   class << self
     def get_remote_result(input)
       response = http_get(input)
-      parse_result(response)
+      result = parse_result(response)
+      find_single_result_if_possible(result, input)
+    end
+
+    def find_single_result_if_possible(hash, input)
+      found = hash.keys.find{|k| compare_normalized(k, input)}
+      found ? { found => hash[found] } : hash
+    end
+
+    def compare_normalized(a,b)
+      normalize(a) == normalize(b)
+    end
+
+    def normalize(string)
+      string.gsub(' ','').downcase
     end
 
     def parse_result(input)
@@ -24,7 +38,7 @@ class AllaBolagScraper
     end
 
     def http_get(input)
-      response = RestClient.get("#{ENDPOINT}#{input}")
+      response = RestClient.get("#{ENDPOINT}#{CGI.escape(input)}")
     end
   end
 end
