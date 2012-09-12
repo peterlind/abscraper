@@ -22,10 +22,17 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'vcr'
+end
+
+group 'test' do
   gem 'launchy'
+  gem 'webmock'
 end
 
 gem 'jquery-rails'
+
+gem 'rest-client'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
