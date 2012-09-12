@@ -3,7 +3,7 @@ class QueriesController < ApplicationController
 
   def show
     input = params[:id]
-    query = Query.where(input: input).first
+    query = Query.fetch_result(input)
     respond_with query
   end
 end
