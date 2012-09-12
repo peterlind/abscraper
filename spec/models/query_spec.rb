@@ -11,7 +11,7 @@ describe Query do
       end
       json = q.as_json
       json['input'].should == 'b'
-      json['result'].should == '2'
+      json['result'].should == ['2']
       json.keys.should =~ ['input', 'result']
     end
   end
