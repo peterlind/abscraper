@@ -11,7 +11,7 @@ opt.parse!(ARGV)
 puts opt unless ARGV
 
 @term = ARGV.join(' ')
-@host ||= 'http://localhost:3000/'
+@host ||= 'http://abscraper.herokuapp.com/'
 
 puts 'Fetching...'
 
