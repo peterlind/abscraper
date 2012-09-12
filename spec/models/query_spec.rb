@@ -44,5 +44,11 @@ describe Query do
       q.result.should == '112233-4455'
       Query.where(input: 'nope').first.should be_present
     end
+    it 'does not cache nil results' do
+      AllaBolagScraper.should_receive(:get_remote_result).with('nil').and_return(nil)
+      q = Query.fetch_result('nil')
+      q.result.should be_nil
+      Query.where(input: 'nil').should be_empty
+    end
   end
 end

@@ -7,7 +7,7 @@ class Query < ActiveRecord::Base
       q = ::Query.new
       q.input = input
       q.result = result
-      q.save
+      q.save if result
     end
     q
   end
