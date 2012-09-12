@@ -28,4 +28,21 @@ describe Query do
       end
     end
   end
+  context 'caching' do
+    it 'returns result if cached' do
+       Query.create!.tap do |q|
+        q.input = 'ab'
+        q.result = '223344-5566'
+        q.save
+      end
+       q = Query.fetch_result 'ab'
+       q.result.should == '223344-5566'
+    end
+    it 'fetches and saves result if not cached' do
+      AllaBolagScraper.should_receive(:get_remote_result).with('nope').and_return('112233-4455')
+      q = Query.fetch_result 'nope'
+      q.result.should == '112233-4455'
+      Query.where(input: 'nope').first.should be_present
+    end
+  end
 end
