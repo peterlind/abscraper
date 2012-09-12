@@ -10,6 +10,22 @@ describe AllaBolagScraper do
       end
     end
   end
+  context 'no results in scraped page' do
+    #response code is still 200
+    it 'returns empty hash' do
+      VCR.use_cassette('ab-asdafasdaf') do
+        result = AllaBolagScraper.get_remote_result('asdafasdaf')
+        result.should be_empty
+      end
+    end
+  end
+  context 'server error' do
+    #restclient returns nil on 500
+    it 'returns nil' do
+      AllaBolagScraper.should_receive(:http_get).and_return(nil)
+      AllaBolagScraper.get_remote_result('BOOM').should be_nil
+    end
+  end
   context '#parse_org_nr' do
     it 'parse and formats input' do
       AllaBolagScraper.parse_org_nr('http://www.allabolag.se/5566334149/ApoEx_AB').should == '556633-4149'

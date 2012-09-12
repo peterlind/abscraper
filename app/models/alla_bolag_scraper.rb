@@ -4,6 +4,7 @@ class AllaBolagScraper
   class << self
     def get_remote_result(input)
       response = http_get(input)
+      return nil unless response
       result = parse_result(response)
       find_single_result_if_possible(result, input)
     end
