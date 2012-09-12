@@ -32,22 +32,22 @@ describe Query do
     it 'returns result if cached' do
        Query.create!.tap do |q|
         q.input = 'ab'
-        q.result = '223344-5566'
+        q.result = '{"ab":"223344-5566"}'
         q.save
       end
        q = Query.fetch_result 'ab'
-       q.result.should == '223344-5566'
+       q.result_as_hash.should == {'ab' => '223344-5566'}
     end
     it 'fetches and saves result if not cached' do
-      AllaBolagScraper.should_receive(:get_remote_result).with('nope').and_return('112233-4455')
+      AllaBolagScraper.should_receive(:get_remote_result).with('nope').and_return({'nope' => '112233-4455'})
       q = Query.fetch_result 'nope'
-      q.result.should == '112233-4455'
+      q.result_as_hash.should == {'nope' => '112233-4455'}
       Query.where(input: 'nope').first.should be_present
     end
     it 'does not cache nil results' do
       AllaBolagScraper.should_receive(:get_remote_result).with('nil').and_return(nil)
       q = Query.fetch_result('nil')
-      q.result.should be_nil
+      q.result_as_hash.should be_nil
       Query.where(input: 'nil').should be_empty
     end
   end

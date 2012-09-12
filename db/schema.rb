@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120912160815) do
+ActiveRecord::Schema.define(:version => 20120912214651) do
 
   create_table "queries", :force => true do |t|
     t.string   "input"
-    t.string   "result"
+    t.text     "result"
     t.string   "remote_ip"
     t.string   "user_agent"
     t.datetime "created_at", :null => false

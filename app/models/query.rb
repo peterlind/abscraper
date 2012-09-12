@@ -1,13 +1,19 @@
 class Query < ActiveRecord::Base
 
+  def result_as_hash
+    JSON.parse(result) if result
+  end
+
   def self.fetch_result(input)
     q = ::Query.where(input: input).first
     unless q
       result = AllaBolagScraper.get_remote_result(input)
       q = ::Query.new
       q.input = input
-      q.result = result
-      q.save if result
+      if result
+        q.result = result.to_json
+        q.save
+      end
     end
     q
   end
