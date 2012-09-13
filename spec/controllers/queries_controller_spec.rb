@@ -17,5 +17,9 @@ describe QueriesController do
       output = Nokogiri::XML response.body
       output.xpath('//query/result').text.should == '123456-7890'
     end
+    it 'handles empty input' do
+      get :show, id: nil, format: :json
+      response.should be_successful
+    end
   end
 end

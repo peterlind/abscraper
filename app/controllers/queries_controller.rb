@@ -3,7 +3,11 @@ class QueriesController < ApplicationController
 
   def show
     input = params[:id]
-    query = Query.fetch_result(input)
+    if input
+      query = Query.fetch_result(input)
+    else
+      query = Query.new
+    end
     respond_with query
   end
 end
