@@ -1,4 +1,5 @@
 class Query < ActiveRecord::Base
+  attr_accessible :input
   serialize :result, Hash
 
   def self.fetch_result(input)
@@ -11,6 +12,10 @@ class Query < ActiveRecord::Base
       q.save if result
     end
     q
+  end
+
+  def to_param
+    input
   end
 
   def as_json(*options)

@@ -1,0 +1,7 @@
+<% @query.result.each do |name,number| %>
+  <h5><%= name %></h5>
+  <p><%= number %></p>
+<% end %>
+<% if @query.result.empty? %>
+  <h5>Inga bolag hittades</h5>
+<% end %>

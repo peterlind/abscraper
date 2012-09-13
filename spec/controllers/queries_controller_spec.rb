@@ -18,8 +18,8 @@ describe QueriesController do
       output.xpath('//query/result').text.should == '123456-7890'
     end
     it 'handles empty input' do
-      get :show, id: nil, format: :json
-      response.should be_successful
+      get :show, id: '', format: :json
+      response.should be_redirect
     end
   end
 end

@@ -15,7 +15,7 @@ puts opt unless ARGV
 
 puts 'Fetching...'
 
-s = open("#{@host}/queries/#{URI.encode(@term)}").string
+s = open("#{@host}/#{URI.encode(@term)}").string
 
 json = JSON.parse(s)
 result = json['result']

@@ -7,8 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= form_for @query, url: {action: :create}, method: :post do |f| %>
+    <%= f.text_field :input %>
+    <%= submit_tag 'Sök' %>
+  <% end %>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

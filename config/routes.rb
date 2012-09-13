@@ -1,4 +1,4 @@
 Abscraper::Application.routes.draw do
-  resources :queries, only: [:show]
-  root to: 'queries#show'
+  resources :queries, only: [:show, :create, :index], path: ''
+  root to: 'queries#index'
 end
