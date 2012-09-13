@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Abscraper</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <%= form_for @query, url: {action: :create}, method: :post do |f| %>
-    <%= f.text_field :input %>
-    <%= submit_tag 'Sök' %>
-  <% end %>
+  <head>
+    <title>Abscraper</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class='row'>
+      <div class='twelve columns'>
+        <h1>Allabolag.se lite</h1>
+        <div class='row'>
+          <div class='six columns'>
+            <%= form_for @query, url: {action: :create}, method: :post do |f| %>
+              <div class="row collapse">
+                <div class="eight mobile-three columns">
 
-  <%= yield %>
+                  <%= f.text_field :input %>
+                </div>
+                <div class="four mobile-one columns">
+                  <%= submit_tag 'Sök', class: 'postfix button expand' %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
 
-</body>
+        <%= yield %>
+      </div>
+      <footer><p>Powered by Ruby on Rails and Heroku. <a href='http://github.com/peterlind/abscraper'>Source on github</a></p></footer>
+    </div>
+  </body>
 </html>

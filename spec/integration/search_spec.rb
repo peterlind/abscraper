@@ -21,5 +21,4 @@ feature 'search for company' do
     end
   end
 
-
 end

@@ -1,7 +1,21 @@
-<% @query.result.each do |name,number| %>
-  <h5><%= name %></h5>
-  <p><%= number %></p>
-<% end %>
-<% if @query.result.empty? %>
-  <h5>Inga bolag hittades</h5>
-<% end %>
+<div class='row'>
+  <div class='eight columns'>
+    <div class='row'>
+      <% @query.result.each do |name,number| %>
+        <div class='six columns'>
+          <div class="panel radius">
+            <h5><%= name %></h5>
+            <p><%= number %></p>
+          </div>
+        </div>
+      <% end %>
+      <% if @query.result.empty? %>
+        <div class='six columns'>
+          <div class="panel radius">
+            <h5>Inga bolag hittades</h5>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
